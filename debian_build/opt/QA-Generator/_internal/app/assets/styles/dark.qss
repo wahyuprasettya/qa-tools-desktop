@@ -1,0 +1,267 @@
+* {
+  font-family: "Mona Sans", "Segoe UI", Tahoma, Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0px;
+}
+
+QWidget {
+  color: #000000;
+  background: #c0c0c0;
+}
+
+#AppShell {
+  background: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+  border-radius: 0px;
+}
+
+#TitleBar {
+  min-height: 30px;
+  max-height: 30px;
+  background: #000080;
+  border: 0px;
+  border-radius: 0px;
+}
+
+#WindowTitle {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+#Brand {
+  color: #000000;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+#WindowButton, #CloseButton, #BackButton {
+  background: #c0c0c0;
+  color: #000000;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+  border-radius: 0px;
+  font-weight: 700;
+  padding: 0px;
+}
+
+#WindowButton:hover, #CloseButton:hover, #BackButton:hover {
+  background: #d8d8d8;
+}
+
+#WindowButton:pressed, #CloseButton:pressed, #BackButton:pressed {
+  border-top: 2px solid #404040;
+  border-left: 2px solid #404040;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  background: #b0b0b0;
+}
+
+#CloseButton {
+  color: #800000;
+}
+
+#Sidebar {
+  min-width: 248px;
+  max-width: 248px;
+  background: #c0c0c0;
+  border-right: 2px solid #808080;
+}
+
+#NavButton {
+  text-align: left;
+  min-height: 34px;
+  padding: 0 12px;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+  border-radius: 0px;
+  background: #c0c0c0;
+  color: #000000;
+  font-weight: 500;
+}
+
+#NavButton:hover {
+  background: #d8d8d8;
+}
+
+#NavButton:checked {
+  background: #000080;
+  color: #ffffff;
+  border-top: 2px solid #404040;
+  border-left: 2px solid #404040;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+}
+
+#PageTitle {
+  color: #000000;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+#Muted {
+  color: #202020;
+}
+
+#MetricCard {
+  background: #d4d0c8;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #808080;
+  border-bottom: 2px solid #808080;
+  border-radius: 0px;
+  padding: 10px;
+}
+
+#MetricValue {
+  color: #000000;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+QTextEdit, QLineEdit, QComboBox, QTableView {
+  background: #ffffff;
+  color: #000000;
+  border-top: 2px solid #404040;
+  border-left: 2px solid #404040;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  border-radius: 0px;
+  selection-background-color: #000080;
+  selection-color: #ffffff;
+}
+
+QTextEdit {
+  padding: 8px;
+  line-height: 1.25;
+}
+
+QLineEdit, QComboBox {
+  min-height: 28px;
+  padding: 0 8px;
+}
+
+QProgressBar {
+  background: #ffffff;
+  color: #000000;
+  border-top: 2px solid #404040;
+  border-left: 2px solid #404040;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  border-radius: 0px;
+  min-height: 24px;
+  text-align: center;
+}
+
+QProgressBar::chunk {
+  background: #000080;
+}
+
+QPushButton {
+  min-height: 30px;
+  padding: 0 12px;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+  border-radius: 0px;
+  background: #c0c0c0;
+  color: #000000;
+  font-weight: 600;
+}
+
+QPushButton:hover {
+  background: #d8d8d8;
+}
+
+QPushButton:pressed {
+  border-top: 2px solid #404040;
+  border-left: 2px solid #404040;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  background: #b0b0b0;
+}
+
+#PrimaryButton {
+  background: #c0c0c0;
+  color: #000000;
+}
+
+#PrimaryButton:hover {
+  background: #d8d8d8;
+}
+
+QHeaderView::section {
+  background: #c0c0c0;
+  color: #000000;
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #808080;
+  border-bottom: 1px solid #808080;
+  padding: 6px;
+  font-weight: 700;
+}
+
+QTableView {
+  gridline-color: #808080;
+  alternate-background-color: #f2f2f2;
+}
+
+QScrollBar:vertical, QScrollBar:horizontal {
+  background: #c0c0c0;
+  border: 1px solid #808080;
+  width: 16px;
+  height: 16px;
+}
+
+QScrollBar::handle {
+  background: #808080;
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #404040;
+  border-bottom: 1px solid #404040;
+}
+
+QCheckBox {
+  min-height: 26px;
+  color: #000000;
+}
+
+#Toast {
+  background: #ffffe1;
+  color: #000000;
+  border: 1px solid #000000;
+  border-radius: 0px;
+  padding: 8px 12px;
+}
+
+#Toast[kind="success"] {
+  border-color: #008000;
+}
+
+#Toast[kind="error"] {
+  border-color: #800000;
+}
+
+#LoadingOverlay {
+  background: rgba(192, 192, 192, 180);
+}
+
+#LoadingLabel {
+  background: #d4d0c8;
+  color: #000000;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+  border-radius: 0px;
+  padding: 12px 18px;
+  font-weight: 700;
+}
