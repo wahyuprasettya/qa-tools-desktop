@@ -13,6 +13,7 @@ from app.services.config_manager import ConfigManager
 from app.services.export_service import ExportService
 from app.services.file_manager import FileManager
 from app.services.history_service import HistoryService
+from app.services.loadrunner_history import LoadRunnerHistoryService
 from app.services.session_service import SessionService
 from app.services.table_parser import ParseResult, TableParser
 from app.services.theme_manager import ThemeManager
@@ -24,6 +25,8 @@ from app.ui.screens import (
     PreviewScreen,
     SettingsScreen,
 )
+from app.ui.loadrunner_screen import LoadRunnerScreen
+from app.ui.pagespeed_screen import PageSpeedScreen
 from app.utils.worker import Worker
 from app.widgets.sidebar import Sidebar
 from app.widgets.loading_overlay import LoadingOverlay
@@ -43,6 +46,7 @@ class MainWindow(QWidget):
         self.config = config
         self.theme = theme
         self.history = history
+        self.lr_history = LoadRunnerHistoryService()
         self.session = session
         self.parser = TableParser()
         self.exporter = ExportService()
@@ -82,6 +86,8 @@ class MainWindow(QWidget):
         self.input_screen = InputScreen()
         self.preview_screen = PreviewScreen(self.config.settings.max_preview_rows)
         self.export_screen = ExportScreen(self.config.settings)
+        self.loadrunner_screen = LoadRunnerScreen(self.lr_history)
+        self.pagespeed_screen = PageSpeedScreen(self.config.settings)
         self.history_screen = HistoryScreen()
         self.settings_screen = SettingsScreen(self.config.settings)
         self.screens = {
@@ -89,6 +95,8 @@ class MainWindow(QWidget):
             "input": self.input_screen,
             "preview": self.preview_screen,
             "export": self.export_screen,
+            "loadrunner": self.loadrunner_screen,
+            "pagespeed": self.pagespeed_screen,
             "history": self.history_screen,
             "settings": self.settings_screen,
         }
@@ -111,6 +119,7 @@ class MainWindow(QWidget):
         self.input_screen.parseRequested.connect(self.parse_text)
         self.preview_screen.exportRequested.connect(lambda: self.navigate("export"))
         self.export_screen.exportRequested.connect(self.export_current)
+        self.loadrunner_screen.reportRequested.connect(lambda msg: self.toast.show_message(msg, "info"))
         self.settings_screen.settingsChanged.connect(self.save_settings)
         self.history_screen.clearRequested.connect(self.clear_history)
 

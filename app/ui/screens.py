@@ -244,6 +244,8 @@ class SettingsScreen(QWidget):
         self.default_format.addItems(["xlsx", "csv"])
         self.default_format.setCurrentText(settings.default_export_format)
         self.output_dir = QLineEdit(settings.output_directory)
+        self.pagespeed_api_key = QLineEdit(settings.pagespeed_api_key)
+        self.pagespeed_api_key.setEchoMode(QLineEdit.Password)
         self.autosave = QCheckBox("Save pasted text between launches")
         self.autosave.setChecked(settings.autosave_session)
         self.open_after_export = QCheckBox("Open exported file after export")
@@ -256,6 +258,7 @@ class SettingsScreen(QWidget):
         form.addRow("Theme", self.theme)
         form.addRow("Default format", self.default_format)
         form.addRow("Output directory", output_row)
+        form.addRow("PageSpeed API Key", self.pagespeed_api_key)
         form.addRow("", self.autosave)
         form.addRow("", self.open_after_export)
         layout.addLayout(form)
@@ -276,6 +279,7 @@ class SettingsScreen(QWidget):
                 "theme": self.theme.currentText(),
                 "default_export_format": self.default_format.currentText(),
                 "output_directory": self.output_dir.text(),
+                "pagespeed_api_key": self.pagespeed_api_key.text(),
                 "autosave_session": self.autosave.isChecked(),
                 "open_after_export": self.open_after_export.isChecked(),
             }

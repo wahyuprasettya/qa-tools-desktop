@@ -16,6 +16,7 @@ class AppSettings:
     autosave_session: bool = True
     open_after_export: bool = False
     max_preview_rows: int = 10000
+    pagespeed_api_key: str = ""
 
 
 class ConfigManager:

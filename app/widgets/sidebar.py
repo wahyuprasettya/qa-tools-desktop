@@ -26,6 +26,8 @@ class Sidebar(QWidget):
             ("input", "Paste"),
             ("preview", "Preview"),
             ("export", "Export"),
+            ("loadrunner", "LoadRunner"),
+            ("pagespeed", "Accessibility"),
             ("history", "History"),
             ("settings", "Settings"),
         ]
