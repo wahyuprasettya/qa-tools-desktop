@@ -1,0 +1,712 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: temp_test.spec.ts >> test
+- Location: temp_test.spec.ts:3:5
+
+# Error details
+
+```
+Test timeout of 30000ms exceeded.
+```
+
+```
+Error: page.waitForEvent: Test timeout of 30000ms exceeded.
+=========================== logs ===========================
+waiting for event "popup"
+============================================================
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - link "Skip to Content" [ref=e2] [cursor=pointer]:
+    - /url: "#content"
+    - text: Skip to content
+  - navigation "Accessibility Tools" [ref=e3]:
+    - link "Open toolbar Accessibility Tools" [ref=e5] [cursor=pointer]:
+      - /url: javascript:void(0);
+      - generic [ref=e6]: Open toolbar
+      - img "Accessibility Tools" [ref=e7]
+    - generic [ref=e10]:
+      - paragraph [ref=e11]: Accessibility Tools
+      - list [ref=e12]:
+        - listitem [ref=e13]:
+          - link "Increase Text" [ref=e14] [cursor=pointer]:
+            - /url: "#"
+            - img "Increase Text" [ref=e16]
+            - text: Increase Text
+        - listitem [ref=e18]:
+          - link "Decrease Text" [ref=e19] [cursor=pointer]:
+            - /url: "#"
+            - img "Decrease Text" [ref=e21]
+            - text: Decrease Text
+        - listitem [ref=e23]:
+          - link "Grayscale" [ref=e24] [cursor=pointer]:
+            - /url: "#"
+            - img "Grayscale" [ref=e26]
+            - text: Grayscale
+        - listitem [ref=e28]:
+          - link "High Contrast" [ref=e29] [cursor=pointer]:
+            - /url: "#"
+            - img "High Contrast" [ref=e31]
+            - text: High Contrast
+        - listitem [ref=e33]:
+          - link "Negative Contrast" [ref=e34] [cursor=pointer]:
+            - /url: "#"
+            - img "Negative Contrast" [ref=e36]
+            - text: Negative Contrast
+        - listitem [ref=e38]:
+          - link "Light Background" [ref=e39] [cursor=pointer]:
+            - /url: "#"
+            - img "Light Background" [ref=e41]
+            - text: Light Background
+        - listitem [ref=e43]:
+          - link "Links Underline" [ref=e44] [cursor=pointer]:
+            - /url: "#"
+            - img "Links Underline" [ref=e46]
+            - text: Links Underline
+        - listitem [ref=e48]:
+          - link "Readable Font" [ref=e49] [cursor=pointer]:
+            - /url: "#"
+            - img "Readable Font" [ref=e51]
+            - text: Readable Font
+        - listitem [ref=e53]:
+          - link "Reset" [ref=e54] [cursor=pointer]:
+            - /url: "#"
+            - img "Reset" [ref=e56]
+            - text: Reset
+      - list [ref=e58]:
+        - listitem [ref=e59]:
+          - link "Help" [ref=e60] [cursor=pointer]:
+            - /url: https://rst7.rschooltoday.com/accessibility-toolbar-help-page/
+            - img "Help" [ref=e62]
+            - text: Help
+  - banner [ref=e64]:
+    - generic [ref=e66]:
+      - generic [ref=e71]:
+        - generic [ref=e74]: 
+        - heading "123 4567" [level=3] [ref=e76]
+      - generic [ref=e81]:
+        - generic [ref=e84]: 
+        - heading "info@yoursitename.com" [level=3] [ref=e86]:
+          - generic [ref=e87]: info@yoursitename.com
+      - list [ref=e92]:
+        - listitem [ref=e93]:
+          - link "Facebook" [ref=e94] [cursor=pointer]:
+            - generic [ref=e95]: Facebook
+            - generic [ref=e96]: 
+        - listitem [ref=e97]:
+          - link "Instagram" [ref=e98] [cursor=pointer]:
+            - /url: https://instagram.com/ArbiterSports
+            - generic [ref=e99]: Instagram
+            - generic [ref=e100]: 
+        - listitem [ref=e101]:
+          - link "Youtube" [ref=e102] [cursor=pointer]:
+            - /url: https://www.youtube.com/user/arbitersports
+            - generic [ref=e103]: Youtube
+            - generic [ref=e104]: 
+      - generic [ref=e107]:
+        - generic:
+          - search:
+            - generic [ref=e109]:
+              - generic [ref=e110]: Search
+              - searchbox "Search..." [ref=e111]
+              - button "Search" [ref=e112] [cursor=pointer]:
+                - generic [ref=e113]: 
+    - generic [ref=e115]:
+      - generic [ref=e120]:
+        - figure [ref=e121]:
+          - link "school logo" [ref=e122] [cursor=pointer]:
+            - /url: https://sandbox.demo-rst7.rschooltoday.com/
+            - img "school logo" [ref=e123]
+        - generic [ref=e124]:
+          - heading "Standard High School" [level=1] [ref=e125]:
+            - link "Standard High School" [ref=e126] [cursor=pointer]:
+              - /url: https://sandbox.demo-rst7.rschooltoday.com/
+          - paragraph [ref=e127]: Home of the Wolfpack
+      - navigation [ref=e132]:
+        - list [ref=e135]:
+          - listitem [ref=e136]:
+            - link "Home" [ref=e137] [cursor=pointer]:
+              - /url: /
+              - generic [ref=e139]: Home
+          - listitem [ref=e140]:
+            - link "About Us" [ref=e141] [cursor=pointer]:
+              - /url: https://sandbox.demo-rst7.rschooltoday.com/about-us/
+              - generic [ref=e143]: About Us
+          - listitem [ref=e144]:
+            - link "Menu [Bear RHS] - Prod" [ref=e145] [cursor=pointer]:
+              - /url: ""
+              - generic [ref=e146]:
+                - text: 
+                - generic [ref=e147]: Menu [Bear RHS] - Prod
+          - listitem [ref=e148]:
+            - link "Menu [Bear RHS]- Stag" [ref=e149] [cursor=pointer]:
+              - /url: ""
+              - generic [ref=e150]:
+                - text: 
+                - generic [ref=e151]: Menu [Bear RHS]- Stag
+          - listitem [ref=e152]:
+            - link "Release Demo" [ref=e153] [cursor=pointer]:
+              - /url: https://sandbox.demo-rst7.rschooltoday.com/release-page-demo-widget/
+              - generic [ref=e154]:
+                - text: 
+                - generic [ref=e155]: Release Demo
+    - generic [ref=e162]:
+      - generic [ref=e163]: "Emergency Notice :"
+      - generic [ref=e165]: Holiday is now. Prepare yourself for new academic year.
+    - navigation "Language Selector":
+      - link "en English" [ref=e169] [cursor=pointer]:
+        - /url: "#"
+        - img "en" [ref=e170]
+        - text: English
+  - main [ref=e171]:
+    - article [ref=e175]:
+      - generic [ref=e176]:
+        - heading "ADO – 52434" [level=1] [ref=e178]
+        - generic [ref=e179]:
+          - generic [ref=e182]:
+            - generic [ref=e184]:
+              - generic [ref=e185]:
+                - generic [ref=e188]: SCOREBOARD
+                - generic [ref=e194] [cursor=pointer]:
+                  - generic [ref=e196]: All Sports
+                  - img [ref=e197]
+              - generic [ref=e199] [cursor=pointer]:
+                - generic [ref=e200]: Powered By
+                - img "Arbiter Sports Logo" [ref=e201]
+            - generic [ref=e204]:
+              - button "← Previous" [ref=e205] [cursor=pointer]
+              - generic [ref=e207]:
+                - generic [ref=e211]:
+                  - generic [ref=e213]: TRACK - OUTDOOR GIRLS VARSITY
+                  - generic [ref=e214]:
+                    - button [ref=e215]:
+                      - generic [ref=e216]:
+                        - generic [ref=e217]:
+                          - generic [ref=e218]: TODAY
+                          - generic [ref=e219]: 4:30 PM
+                        - generic [ref=e220]:
+                          - generic [ref=e221]:
+                            - img [ref=e222]:
+                              - img [ref=e223]
+                            - generic [ref=e224]: Squalicum HS
+                          - generic [ref=e225]: "-"
+                        - generic [ref=e226]:
+                          - generic [ref=e227]:
+                            - img [ref=e228]:
+                              - img [ref=e229]
+                            - generic [ref=e230]: Bellingham HS with 2 others
+                          - generic [ref=e231]: "-"
+                      - generic [ref=e232]:
+                        - img [ref=e233]
+                        - generic [ref=e236]: Civic Stadium
+                    - button [ref=e239] [cursor=pointer]:
+                      - generic [ref=e240]: Game Details
+                - generic [ref=e244]:
+                  - generic [ref=e246]: TRACK - OUTDOOR BOYS VARSITY
+                  - generic [ref=e247]:
+                    - button [ref=e248]:
+                      - generic [ref=e249]:
+                        - generic [ref=e250]:
+                          - generic [ref=e251]: TODAY
+                          - generic [ref=e252]: 4:30 PM
+                        - generic [ref=e253]:
+                          - generic [ref=e254]:
+                            - img [ref=e255]:
+                              - img [ref=e256]
+                            - generic [ref=e257]: Squalicum HS
+                          - generic [ref=e258]: "-"
+                        - generic [ref=e259]:
+                          - generic [ref=e260]:
+                            - img [ref=e261]:
+                              - img [ref=e262]
+                            - generic [ref=e263]: Bellingham HS with 2 others
+                          - generic [ref=e264]: "-"
+                      - generic [ref=e265]:
+                        - img [ref=e266]
+                        - generic [ref=e269]: Civic Stadium
+                    - button [ref=e272] [cursor=pointer]:
+                      - generic [ref=e273]: Game Details
+                - generic [ref=e277]:
+                  - generic [ref=e279]: TRACK - OUTDOOR GIRLS VARSITY
+                  - generic [ref=e280]:
+                    - button [ref=e281]:
+                      - generic [ref=e282]:
+                        - generic [ref=e283]:
+                          - generic [ref=e284]: May 15, 2026
+                          - generic [ref=e285]: 4:30 PM
+                        - generic [ref=e286]:
+                          - generic [ref=e287]:
+                            - img [ref=e288]:
+                              - img [ref=e289]
+                            - generic [ref=e290]: Squalicum HS
+                          - generic [ref=e291]: "-"
+                        - generic [ref=e292]:
+                          - generic [ref=e293]:
+                            - img [ref=e294]:
+                              - img [ref=e295]
+                            - generic [ref=e296]: Bellingham HS with 2 others
+                          - generic [ref=e297]: "-"
+                      - generic [ref=e298]:
+                        - img [ref=e299]
+                        - generic [ref=e302]: Civic Stadium
+                    - button [ref=e305] [cursor=pointer]:
+                      - generic [ref=e306]: Game Details
+                - generic [ref=e310]:
+                  - generic [ref=e312]: TRACK - OUTDOOR BOYS VARSITY
+                  - generic [ref=e313]:
+                    - button [ref=e314]:
+                      - generic [ref=e315]:
+                        - generic [ref=e316]:
+                          - generic [ref=e317]: May 15, 2026
+                          - generic [ref=e318]: 4:30 PM
+                        - generic [ref=e319]:
+                          - generic [ref=e320]:
+                            - img [ref=e321]:
+                              - img [ref=e322]
+                            - generic [ref=e323]: Squalicum HS
+                          - generic [ref=e324]: "-"
+                        - generic [ref=e325]:
+                          - generic [ref=e326]:
+                            - img [ref=e327]:
+                              - img [ref=e328]
+                            - generic [ref=e329]: Bellingham HS with 2 others
+                          - generic [ref=e330]: "-"
+                      - generic [ref=e331]:
+                        - img [ref=e332]
+                        - generic [ref=e335]: Civic Stadium
+                    - button [ref=e338] [cursor=pointer]:
+                      - generic [ref=e339]: Game Details
+                - generic [ref=e343]:
+                  - generic [ref=e345]: TRACK - OUTDOOR GIRLS VARSITY
+                  - generic [ref=e346]:
+                    - button [ref=e347]:
+                      - generic [ref=e348]:
+                        - generic [ref=e349]:
+                          - generic [ref=e350]: May 8, 2026
+                          - generic [ref=e351]: 3:30 PM
+                        - generic [ref=e352]:
+                          - generic [ref=e353]:
+                            - img [ref=e354]:
+                              - img [ref=e355]
+                            - generic [ref=e356]: Sedro-Woolley HS
+                          - generic [ref=e357]: "-"
+                        - generic [ref=e358]:
+                          - generic [ref=e359]:
+                            - img [ref=e360]:
+                              - img [ref=e361]
+                            - generic [ref=e362]: Oak Harbor HS with 14 others
+                          - generic [ref=e363]: "-"
+                      - generic [ref=e364]:
+                        - img [ref=e365]
+                        - generic [ref=e368]: Sedro Woolley HS
+                    - button [ref=e371] [cursor=pointer]:
+                      - generic [ref=e372]: Game Details
+                - generic [ref=e376]:
+                  - generic [ref=e378]: TRACK - OUTDOOR BOYS VARSITY
+                  - generic [ref=e379]:
+                    - button "Oak Harbor HS with 14 others vs Sedro-Woolley HS, May 8, 2026" [ref=e380]:
+                      - generic [ref=e381]:
+                        - generic [ref=e382]:
+                          - generic [ref=e383]: May 8, 2026
+                          - generic [ref=e384]: 3:30 PM
+                        - generic [ref=e385]:
+                          - generic [ref=e386]:
+                            - img "Sedro-Woolley HS" [ref=e387]:
+                              - img "Sedro-Woolley HS" [ref=e388]
+                            - generic [ref=e389]: Sedro-Woolley HS
+                          - generic [ref=e390]: "-"
+                        - generic [ref=e391]:
+                          - generic [ref=e392]:
+                            - img "Oak Harbor HS with 14 others" [ref=e393]:
+                              - img "Oak Harbor HS with 14 others" [ref=e394]
+                            - generic [ref=e395]: Oak Harbor HS with 14 others
+                          - generic [ref=e396]: "-"
+                      - generic [ref=e397]:
+                        - img [ref=e398]
+                        - generic "Sedro Woolley HS" [ref=e401]
+                    - button "View game details" [ref=e404] [cursor=pointer]:
+                      - generic [ref=e405]: Game Details
+                - generic [ref=e409]:
+                  - generic [ref=e411]: TRACK - OUTDOOR GIRLS VARSITY
+                  - generic [ref=e412]:
+                    - button "Bellingham HS with 2 others vs Squalicum HS, TODAY" [ref=e413]:
+                      - generic [ref=e414]:
+                        - generic [ref=e415]:
+                          - generic [ref=e416]: TODAY
+                          - generic [ref=e417]: 4:30 PM
+                        - generic [ref=e418]:
+                          - generic [ref=e419]:
+                            - img "Squalicum HS" [ref=e420]:
+                              - img "Squalicum HS" [ref=e421]
+                            - generic [ref=e422]: Squalicum HS
+                          - generic [ref=e423]: "-"
+                        - generic [ref=e424]:
+                          - generic [ref=e425]:
+                            - img "Bellingham HS with 2 others" [ref=e426]:
+                              - img "Bellingham HS with 2 others" [ref=e427]
+                            - generic [ref=e428]: Bellingham HS with 2 others
+                          - generic [ref=e429]: "-"
+                      - generic [ref=e430]:
+                        - img [ref=e431]
+                        - generic "Civic Stadium" [ref=e434]
+                    - button "View game details" [ref=e437] [cursor=pointer]:
+                      - generic [ref=e438]: Game Details
+                - generic [ref=e442]:
+                  - generic [ref=e444]: TRACK - OUTDOOR BOYS VARSITY
+                  - generic [ref=e445]:
+                    - button "Bellingham HS with 2 others vs Squalicum HS, TODAY" [ref=e446]:
+                      - generic [ref=e447]:
+                        - generic [ref=e448]:
+                          - generic [ref=e449]: TODAY
+                          - generic [ref=e450]: 4:30 PM
+                        - generic [ref=e451]:
+                          - generic [ref=e452]:
+                            - img "Squalicum HS" [ref=e453]:
+                              - img "Squalicum HS" [ref=e454]
+                            - generic [ref=e455]: Squalicum HS
+                          - generic [ref=e456]: "-"
+                        - generic [ref=e457]:
+                          - generic [ref=e458]:
+                            - img "Bellingham HS with 2 others" [ref=e459]:
+                              - img "Bellingham HS with 2 others" [ref=e460]
+                            - generic [ref=e461]: Bellingham HS with 2 others
+                          - generic [ref=e462]: "-"
+                      - generic [ref=e463]:
+                        - img [ref=e464]
+                        - generic "Civic Stadium" [ref=e467]
+                    - button "View game details" [ref=e470] [cursor=pointer]:
+                      - generic [ref=e471]: Game Details
+                - generic [ref=e475]:
+                  - generic [ref=e477]: TRACK - OUTDOOR GIRLS VARSITY
+                  - generic [ref=e478]:
+                    - button "Bellingham HS with 2 others vs Squalicum HS, May 15, 2026" [ref=e479]:
+                      - generic [ref=e480]:
+                        - generic [ref=e481]:
+                          - generic [ref=e482]: May 15, 2026
+                          - generic [ref=e483]: 4:30 PM
+                        - generic [ref=e484]:
+                          - generic [ref=e485]:
+                            - img "Squalicum HS" [ref=e486]:
+                              - img "Squalicum HS" [ref=e487]
+                            - generic [ref=e488]: Squalicum HS
+                          - generic [ref=e489]: "-"
+                        - generic [ref=e490]:
+                          - generic [ref=e491]:
+                            - img "Bellingham HS with 2 others" [ref=e492]:
+                              - img "Bellingham HS with 2 others" [ref=e493]
+                            - generic [ref=e494]: Bellingham HS with 2 others
+                          - generic [ref=e495]: "-"
+                      - generic [ref=e496]:
+                        - img [ref=e497]
+                        - generic "Civic Stadium" [ref=e500]
+                    - button "View game details" [ref=e503] [cursor=pointer]:
+                      - generic [ref=e504]: Game Details
+                - generic [ref=e508]:
+                  - generic [ref=e510]: TRACK - OUTDOOR BOYS VARSITY
+                  - generic [ref=e511]:
+                    - button [ref=e512]:
+                      - generic [ref=e513]:
+                        - generic [ref=e514]:
+                          - generic [ref=e515]: May 15, 2026
+                          - generic [ref=e516]: 4:30 PM
+                        - generic [ref=e517]:
+                          - generic [ref=e518]:
+                            - img [ref=e519]:
+                              - img [ref=e520]
+                            - generic [ref=e521]: Squalicum HS
+                          - generic [ref=e522]: "-"
+                        - generic [ref=e523]:
+                          - generic [ref=e524]:
+                            - img [ref=e525]:
+                              - img [ref=e526]
+                            - generic [ref=e527]: Bellingham HS with 2 others
+                          - generic [ref=e528]: "-"
+                      - generic [ref=e529]:
+                        - img [ref=e530]
+                        - generic [ref=e533]: Civic Stadium
+                    - button [ref=e536] [cursor=pointer]:
+                      - generic [ref=e537]: Game Details
+                - generic [ref=e541]:
+                  - generic [ref=e543]: TRACK - OUTDOOR GIRLS VARSITY
+                  - generic [ref=e544]:
+                    - button [ref=e545]:
+                      - generic [ref=e546]:
+                        - generic [ref=e547]:
+                          - generic [ref=e548]: May 8, 2026
+                          - generic [ref=e549]: 3:30 PM
+                        - generic [ref=e550]:
+                          - generic [ref=e551]:
+                            - img [ref=e552]:
+                              - img [ref=e553]
+                            - generic [ref=e554]: Sedro-Woolley HS
+                          - generic [ref=e555]: "-"
+                        - generic [ref=e556]:
+                          - generic [ref=e557]:
+                            - img [ref=e558]:
+                              - img [ref=e559]
+                            - generic [ref=e560]: Oak Harbor HS with 14 others
+                          - generic [ref=e561]: "-"
+                      - generic [ref=e562]:
+                        - img [ref=e563]
+                        - generic [ref=e566]: Sedro Woolley HS
+                    - button [ref=e569] [cursor=pointer]:
+                      - generic [ref=e570]: Game Details
+                - generic [ref=e574]:
+                  - generic [ref=e576]: TRACK - OUTDOOR BOYS VARSITY
+                  - generic [ref=e577]:
+                    - button [ref=e578]:
+                      - generic [ref=e579]:
+                        - generic [ref=e580]:
+                          - generic [ref=e581]: May 8, 2026
+                          - generic [ref=e582]: 3:30 PM
+                        - generic [ref=e583]:
+                          - generic [ref=e584]:
+                            - img [ref=e585]:
+                              - img [ref=e586]
+                            - generic [ref=e587]: Sedro-Woolley HS
+                          - generic [ref=e588]: "-"
+                        - generic [ref=e589]:
+                          - generic [ref=e590]:
+                            - img [ref=e591]:
+                              - img [ref=e592]
+                            - generic [ref=e593]: Oak Harbor HS with 14 others
+                          - generic [ref=e594]: "-"
+                      - generic [ref=e595]:
+                        - img [ref=e596]
+                        - generic [ref=e599]: Sedro Woolley HS
+                    - button [ref=e602] [cursor=pointer]:
+                      - generic [ref=e603]: Game Details
+                - generic [ref=e607]:
+                  - generic [ref=e609]: TRACK - OUTDOOR GIRLS VARSITY
+                  - generic [ref=e610]:
+                    - button [ref=e611]:
+                      - generic [ref=e612]:
+                        - generic [ref=e613]:
+                          - generic [ref=e614]: TODAY
+                          - generic [ref=e615]: 4:30 PM
+                        - generic [ref=e616]:
+                          - generic [ref=e617]:
+                            - img [ref=e618]:
+                              - img [ref=e619]
+                            - generic [ref=e620]: Squalicum HS
+                          - generic [ref=e621]: "-"
+                        - generic [ref=e622]:
+                          - generic [ref=e623]:
+                            - img [ref=e624]:
+                              - img [ref=e625]
+                            - generic [ref=e626]: Bellingham HS with 2 others
+                          - generic [ref=e627]: "-"
+                      - generic [ref=e628]:
+                        - img [ref=e629]
+                        - generic [ref=e632]: Civic Stadium
+                    - button [ref=e635] [cursor=pointer]:
+                      - generic [ref=e636]: Game Details
+                - generic [ref=e640]:
+                  - generic [ref=e642]: TRACK - OUTDOOR BOYS VARSITY
+                  - generic [ref=e643]:
+                    - button [ref=e644]:
+                      - generic [ref=e645]:
+                        - generic [ref=e646]:
+                          - generic [ref=e647]: TODAY
+                          - generic [ref=e648]: 4:30 PM
+                        - generic [ref=e649]:
+                          - generic [ref=e650]:
+                            - img [ref=e651]:
+                              - img [ref=e652]
+                            - generic [ref=e653]: Squalicum HS
+                          - generic [ref=e654]: "-"
+                        - generic [ref=e655]:
+                          - generic [ref=e656]:
+                            - img [ref=e657]:
+                              - img [ref=e658]
+                            - generic [ref=e659]: Bellingham HS with 2 others
+                          - generic [ref=e660]: "-"
+                      - generic [ref=e661]:
+                        - img [ref=e662]
+                        - generic [ref=e665]: Civic Stadium
+                    - button [ref=e668] [cursor=pointer]:
+                      - generic [ref=e669]: Game Details
+                - generic [ref=e673]:
+                  - generic [ref=e675]: TRACK - OUTDOOR GIRLS VARSITY
+                  - generic [ref=e676]:
+                    - button [ref=e677]:
+                      - generic [ref=e678]:
+                        - generic [ref=e679]:
+                          - generic [ref=e680]: May 15, 2026
+                          - generic [ref=e681]: 4:30 PM
+                        - generic [ref=e682]:
+                          - generic [ref=e683]:
+                            - img [ref=e684]:
+                              - img [ref=e685]
+                            - generic [ref=e686]: Squalicum HS
+                          - generic [ref=e687]: "-"
+                        - generic [ref=e688]:
+                          - generic [ref=e689]:
+                            - img [ref=e690]:
+                              - img [ref=e691]
+                            - generic [ref=e692]: Bellingham HS with 2 others
+                          - generic [ref=e693]: "-"
+                      - generic [ref=e694]:
+                        - img [ref=e695]
+                        - generic [ref=e698]: Civic Stadium
+                    - button [ref=e701] [cursor=pointer]:
+                      - generic [ref=e702]: Game Details
+                - generic [ref=e706]:
+                  - generic [ref=e708]: TRACK - OUTDOOR BOYS VARSITY
+                  - generic [ref=e709]:
+                    - button [ref=e710]:
+                      - generic [ref=e711]:
+                        - generic [ref=e712]:
+                          - generic [ref=e713]: May 15, 2026
+                          - generic [ref=e714]: 4:30 PM
+                        - generic [ref=e715]:
+                          - generic [ref=e716]:
+                            - img [ref=e717]:
+                              - img [ref=e718]
+                            - generic [ref=e719]: Squalicum HS
+                          - generic [ref=e720]: "-"
+                        - generic [ref=e721]:
+                          - generic [ref=e722]:
+                            - img [ref=e723]:
+                              - img [ref=e724]
+                            - generic [ref=e725]: Bellingham HS with 2 others
+                          - generic [ref=e726]: "-"
+                      - generic [ref=e727]:
+                        - img [ref=e728]
+                        - generic [ref=e731]: Civic Stadium
+                    - button [ref=e734] [cursor=pointer]:
+                      - generic [ref=e735]: Game Details
+              - button "← Next" [ref=e736] [cursor=pointer]
+          - paragraph
+  - region "Section 4" [ref=e737]:
+    - generic [ref=e738]:
+      - generic [ref=e741]:
+        - generic [ref=e746]:
+          - figure [ref=e747]:
+            - img "Logo 1" [ref=e748]
+          - generic [ref=e749]:
+            - heading "Standard High School" [level=2] [ref=e750]
+            - paragraph [ref=e751]: Home of the Wolfpack
+        - generic [ref=e753]:
+          - heading "Social Media" [level=2] [ref=e756]
+          - list [ref=e759]:
+            - listitem [ref=e760]:
+              - link "Facebook-f" [ref=e761] [cursor=pointer]:
+                - generic [ref=e762]: Facebook-f
+                - generic [ref=e763]: 
+            - listitem [ref=e764]:
+              - link "Instagram" [ref=e765] [cursor=pointer]:
+                - /url: https://instagram.com/ArbiterSports
+                - generic [ref=e766]: Instagram
+                - generic [ref=e767]: 
+            - listitem [ref=e768]:
+              - link "Youtube" [ref=e769] [cursor=pointer]:
+                - /url: https://www.youtube.com/user/arbitersports
+                - generic [ref=e770]: Youtube
+                - generic [ref=e771]: 
+        - generic [ref=e773]:
+          - heading "Contact Us" [level=2] [ref=e776]
+          - generic [ref=e778]:
+            - paragraph [ref=e779]: Standard High School
+            - paragraph [ref=e780]: (952) 960-4999
+            - paragraph [ref=e781]:
+              - link "info@rschooltoday.com" [ref=e783] [cursor=pointer]:
+                - /url: mailto:info@rschooltoday.com
+      - generic [ref=e785]:
+        - generic [ref=e790]:
+          - paragraph [ref=e791]: Powered by
+          - link "rschooltoday" [ref=e792] [cursor=pointer]:
+            - /url: https://arbiter.io
+            - img "rschooltoday" [ref=e793]
+          - link "| Policies" [ref=e794] [cursor=pointer]:
+            - /url: https://arbiter.io/terms-and-conditions/
+        - link "Web Admin" [ref=e800] [cursor=pointer]:
+          - /url: /admin
+          - generic [ref=e802]: Web Admin
+  - region "Back to top":
+    - 'link "View #" [ref=e803] [cursor=pointer]':
+      - /url: "#"
+      - text: 
+  - region "Section 60" [ref=e804]: desktop
+  - text:          
+  - generic [ref=e807]:
+    - generic [ref=e808]:
+      - generic [ref=e809]:
+        - generic [ref=e810]: Track - Outdoor Girls Varsity
+        - generic [ref=e811]: Wednesday, May 13, 2026
+      - button "Close modal" [ref=e812] [cursor=pointer]:
+        - img [ref=e813]
+    - generic [active] [ref=e816]:
+      - generic [ref=e818]:
+        - generic [ref=e819]:
+          - img "Squalicum HS logo" [ref=e821]:
+            - img "Squalicum HS logo" [ref=e822]
+          - generic [ref=e823]:
+            - generic [ref=e824]: Home
+            - generic [ref=e825]: Squalicum HS
+            - generic [ref=e826]: "-"
+        - generic [ref=e828]: VS
+        - generic [ref=e829]:
+          - img "Bellingham HS with 2 others logo" [ref=e831]:
+            - img "Bellingham HS with 2 others logo" [ref=e832]
+          - generic [ref=e833]:
+            - generic [ref=e834]: Away
+            - generic [ref=e835]: Bellingham HS with 2 others
+            - generic [ref=e836]: "-"
+      - generic [ref=e838]: Game Information
+      - generic [ref=e839]:
+        - generic [ref=e841]:
+          - img [ref=e843]
+          - generic [ref=e845]:
+            - generic [ref=e846]: DATE & TIME
+            - generic [ref=e847]:
+              - generic [ref=e848]: Wednesday, May 13
+              - generic [ref=e849]: 4:30 PM
+        - generic [ref=e851]:
+          - img [ref=e853]
+          - generic [ref=e856]:
+            - generic [ref=e857]: LOCATION
+            - generic [ref=e858]:
+              - generic [ref=e859]: Civic Stadium
+              - generic [ref=e860]: Civic Stadium
+              - generic [ref=e861]: 1225 Civic Field Way
+              - generic [ref=e862]: Bellingham, WA 98229
+      - generic [ref=e863]:
+        - button "Add to calendar" [ref=e864] [cursor=pointer]:
+          - img [ref=e865]
+          - text: Add to Calendar
+        - button "Open directions in maps for Civic Stadium" [ref=e867] [cursor=pointer]:
+          - img [ref=e868]
+          - text: Get Directions
+```
+
+# Test source
+
+```ts
+  1  | import { test, expect } from '@playwright/test';
+  2  | 
+  3  | test('test', async ({ page }) => {
+  4  |   await page.goto('https://sandbox.demo-rst7.rschooltoday.com/ado-52434/');
+  5  |   await page.getByRole('button', { name: 'Select Sports Filter' }).click();
+  6  |   await page.getByText('Futsal').click();
+  7  |   await page.locator('.lucide').first().click();
+  8  |   await page.getByRole('button', { name: '← Previous' }).click();
+  9  |   await page.getByRole('button', { name: '← Next' }).click();
+  10 |   await page.getByRole('button', { name: 'View game details' }).nth(2).click();
+  11 |   await page.getByRole('button', { name: 'Close modal' }).click();
+  12 |   await page.getByRole('button', { name: 'View game details' }).nth(1).click();
+> 13 |   const page1Promise = page.waitForEvent('popup');
+     |                             ^ Error: page.waitForEvent: Test timeout of 30000ms exceeded.
+  14 |   await page.getByRole('button', { name: 'Open directions in maps for' }).click();
+  15 |   const page1 = await page1Promise;
+  16 | });
+```

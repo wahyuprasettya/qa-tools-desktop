@@ -28,6 +28,7 @@ class Sidebar(QWidget):
             ("export", "Export"),
             ("loadrunner", "LoadRunner"),
             ("pagespeed", "Accessibility"),
+            ("playwright", "Playwright"),
             ("history", "History"),
             ("settings", "Settings"),
         ]

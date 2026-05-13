@@ -17,6 +17,7 @@ class AppSettings:
     open_after_export: bool = False
     max_preview_rows: int = 10000
     pagespeed_api_key: str = ""
+    playwright_path: str = "npx playwright"
 
 
 class ConfigManager:

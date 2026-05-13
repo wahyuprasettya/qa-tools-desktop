@@ -1,0 +1,27 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "QA tools is a modern PySide6 desktop application for turning raw text copied from ChatGPT into clean Excel or CSV tables.",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wahyuprasettya/qa-tools-desktop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wahyuprasettya/qa-tools-desktop/issues"
+  },
+  "homepage": "https://github.com/wahyuprasettya/qa-tools-desktop#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.60.0"
+  }
+}

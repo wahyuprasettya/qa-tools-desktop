@@ -250,6 +250,7 @@ class SettingsScreen(QWidget):
         self.autosave.setChecked(settings.autosave_session)
         self.open_after_export = QCheckBox("Open exported file after export")
         self.open_after_export.setChecked(settings.open_after_export)
+        self.playwright_path = QLineEdit(settings.playwright_path)
         browse = QPushButton("Browse")
         browse.clicked.connect(self._choose_directory)
         output_row = QHBoxLayout()
@@ -259,6 +260,7 @@ class SettingsScreen(QWidget):
         form.addRow("Default format", self.default_format)
         form.addRow("Output directory", output_row)
         form.addRow("PageSpeed API Key", self.pagespeed_api_key)
+        form.addRow("Playwright Path", self.playwright_path)
         form.addRow("", self.autosave)
         form.addRow("", self.open_after_export)
         layout.addLayout(form)
@@ -280,6 +282,7 @@ class SettingsScreen(QWidget):
                 "default_export_format": self.default_format.currentText(),
                 "output_directory": self.output_dir.text(),
                 "pagespeed_api_key": self.pagespeed_api_key.text(),
+                "playwright_path": self.playwright_path.text(),
                 "autosave_session": self.autosave.isChecked(),
                 "open_after_export": self.open_after_export.isChecked(),
             }

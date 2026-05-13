@@ -27,6 +27,8 @@ from app.ui.screens import (
 )
 from app.ui.loadrunner_screen import LoadRunnerScreen
 from app.ui.pagespeed_screen import PageSpeedScreen
+from app.ui.playwright_screen import PlaywrightScreen
+from app.services.playwright_service import PlaywrightService
 from app.utils.worker import Worker
 from app.widgets.sidebar import Sidebar
 from app.widgets.loading_overlay import LoadingOverlay
@@ -51,6 +53,7 @@ class MainWindow(QWidget):
         self.parser = TableParser()
         self.exporter = ExportService()
         self.thread_pool = QThreadPool.globalInstance()
+        self.playwright_service = PlaywrightService()
         self.current_dataframe: pd.DataFrame | None = None
         self.export_in_progress = False
         self.active_workers: list[Worker] = []
@@ -88,6 +91,7 @@ class MainWindow(QWidget):
         self.export_screen = ExportScreen(self.config.settings)
         self.loadrunner_screen = LoadRunnerScreen(self.lr_history)
         self.pagespeed_screen = PageSpeedScreen(self.config.settings)
+        self.playwright_screen = PlaywrightScreen(self.playwright_service)
         self.history_screen = HistoryScreen()
         self.settings_screen = SettingsScreen(self.config.settings)
         self.screens = {
@@ -97,12 +101,14 @@ class MainWindow(QWidget):
             "export": self.export_screen,
             "loadrunner": self.loadrunner_screen,
             "pagespeed": self.pagespeed_screen,
+            "playwright": self.playwright_screen,
             "history": self.history_screen,
             "settings": self.settings_screen,
         }
         for screen in self.screens.values():
             self.stack.addWidget(screen)
 
+        self.playwright_service.set_playwright_path(self.config.settings.playwright_path)
         self.toast = Toast(self.shell)
         self.loading = LoadingOverlay(self.shell)
         self._connect_signals()
@@ -122,6 +128,16 @@ class MainWindow(QWidget):
         self.loadrunner_screen.reportRequested.connect(lambda msg: self.toast.show_message(msg, "info"))
         self.settings_screen.settingsChanged.connect(self.save_settings)
         self.history_screen.clearRequested.connect(self.clear_history)
+        
+        self.playwright_service.signals.install_progress.connect(self.loading.show_message)
+        self.playwright_service.signals.install_finished.connect(self._handle_playwright_install_finished)
+
+    def _handle_playwright_install_finished(self, success: bool, message: str) -> None:
+        self.loading.hide()
+        if success:
+            self.toast.show_message("Playwright setup complete!", "success")
+        else:
+            self.toast.show_message(message, "error")
 
     def _install_shortcuts(self) -> None:
         shortcuts = [
@@ -142,8 +158,12 @@ class MainWindow(QWidget):
         self.sidebar.set_active(route)
         if route == "history":
             self.refresh_history()
-        if route == "export":
+        elif route == "export":
             self.export_screen.set_summary(self.current_dataframe)
+        elif route == "playwright":
+            if not self.playwright_service.check_is_installed():
+                self.loading.show_message("Setting up Playwright for the first time...")
+                self.playwright_service.install_dependencies()
 
     def parse_text(self, text: str) -> None:
         if self.config.settings.autosave_session:
@@ -222,6 +242,7 @@ class MainWindow(QWidget):
 
     def save_settings(self, values: dict) -> None:
         self.config.update(**values)
+        self.playwright_service.set_playwright_path(self.config.settings.playwright_path)
         self.theme.apply(self.config.settings.theme)
         self.toast.show_message("Settings saved.", "success")
 

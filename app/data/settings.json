@@ -1,9 +1,10 @@
 {
-  "theme": "dark",
+  "theme": "light",
   "default_export_format": "xlsx",
   "output_directory": "/home/nb83/Documents",
   "autosave_session": true,
   "open_after_export": false,
   "max_preview_rows": 10000,
-  "pagespeed_api_key": ""
+  "pagespeed_api_key": "",
+  "playwright_path": "npx playwright"
 }
