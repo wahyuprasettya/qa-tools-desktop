@@ -77,7 +77,7 @@ class ExportService:
                 f"Writing XLSX row {written_rows}/{total_rows}...",
             )
 
-        header_fill = PatternFill("solid", fgColor="1F6FEB")
+        header_fill = PatternFill("solid", fgColor="92D050")
         zebra_fill = PatternFill("solid", fgColor="F6F8FA")
         header_font = Font(bold=True, color="FFFFFF")
 

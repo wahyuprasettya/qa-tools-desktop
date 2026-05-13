@@ -28,6 +28,7 @@ from app.ui.screens import (
 from app.ui.loadrunner_screen import LoadRunnerScreen
 from app.ui.pagespeed_screen import PageSpeedScreen
 from app.ui.playwright_screen import PlaywrightScreen
+from app.ui.widgets_preview_screen import WidgetsPreviewScreen
 from app.services.playwright_service import PlaywrightService
 from app.utils.worker import Worker
 from app.widgets.sidebar import Sidebar
@@ -92,6 +93,7 @@ class MainWindow(QWidget):
         self.loadrunner_screen = LoadRunnerScreen(self.lr_history)
         self.pagespeed_screen = PageSpeedScreen(self.config.settings)
         self.playwright_screen = PlaywrightScreen(self.playwright_service)
+        self.widgets_screen = WidgetsPreviewScreen()
         self.history_screen = HistoryScreen()
         self.settings_screen = SettingsScreen(self.config.settings)
         self.screens = {
@@ -102,6 +104,7 @@ class MainWindow(QWidget):
             "loadrunner": self.loadrunner_screen,
             "pagespeed": self.pagespeed_screen,
             "playwright": self.playwright_screen,
+            "widgets": self.widgets_screen,
             "history": self.history_screen,
             "settings": self.settings_screen,
         }
@@ -268,6 +271,7 @@ class MainWindow(QWidget):
     def closeEvent(self, event) -> None:  # type: ignore[override]
         if self.config.settings.autosave_session:
             self.session.save_text(self.input_screen.text())
+        self.widgets_screen.stop_server()
         super().closeEvent(event)
 
     def _toggle_maximized(self) -> None:

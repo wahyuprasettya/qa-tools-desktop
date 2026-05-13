@@ -6,13 +6,14 @@ from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, 
     QTabWidget, QTextEdit, QPlainTextEdit, QTableWidget, 
     QTableWidgetItem, QHeaderView, QFileDialog, QSplitter,
-    QLineEdit, QFormLayout
+    QLineEdit, QFormLayout, QApplication
 )
 from PySide6.QtGui import QFont
 
 from app.services.playwright_service import PlaywrightService
 from app.services.playwright_report_service import PlaywrightReportService, PlaywrightTestResult
 from app.utils.highlighter import TypeScriptHighlighter
+from app.core.paths import PLAYWRIGHT_DIR
 
 class PlaywrightScreen(QWidget):
     def __init__(self, playwright_service: PlaywrightService) -> None:
@@ -90,6 +91,14 @@ class PlaywrightScreen(QWidget):
         
         self.script_editor = QPlainTextEdit()
         self.script_editor.setFont(QFont("Courier New", 11))
+        self.script_editor.setStyleSheet("""
+            QPlainTextEdit {
+                background-color: #000000;
+                color: #00FF00;
+                selection-background-color: #333333;
+                border: 1px solid #333333;
+            }
+        """)
         self.script_editor.setPlaceholderText("Record a script or paste your Playwright code here...")
         self.highlighter = TypeScriptHighlighter(self.script_editor.document())
         layout.addWidget(self.script_editor)
@@ -133,8 +142,10 @@ class PlaywrightScreen(QWidget):
         self.export_report_btn = QPushButton("Export to Excel")
         self.export_report_btn.setObjectName("PrimaryButton")
         self.add_row_btn = QPushButton("Add Manual Result")
+        self.copy_comment_btn = QPushButton("Copy Jira/ADO Comment")
         
         btn_layout.addWidget(self.add_row_btn)
+        btn_layout.addWidget(self.copy_comment_btn)
         btn_layout.addStretch()
         btn_layout.addWidget(self.export_report_btn)
         layout.addLayout(btn_layout)
@@ -146,6 +157,7 @@ class PlaywrightScreen(QWidget):
         self.run_test_btn.clicked.connect(self.run_test)
         self.export_report_btn.clicked.connect(self.export_report)
         self.add_row_btn.clicked.connect(self.add_empty_row)
+        self.copy_comment_btn.clicked.connect(self.copy_jira_comment)
 
         self.service.signals.log.connect(self.append_log)
         self.service.signals.finished.connect(self.on_execution_finished)
@@ -175,8 +187,8 @@ class PlaywrightScreen(QWidget):
             self.append_log(f"Script saved to: {path}")
 
     def run_test(self):
-        # Temporarily save script to run it
-        temp_path = Path("temp_test.spec.ts")
+        # Temporarily save script to run it in PLAYWRIGHT_DIR
+        temp_path = PLAYWRIGHT_DIR / "temp_test.spec.ts"
         temp_path.write_text(self.script_editor.toPlainText())
         
         self.log_viewer.clear()
@@ -245,3 +257,26 @@ class PlaywrightScreen(QWidget):
 
             self.report_service.generate_report(self.results, Path(path))
             self.append_log(f"Report exported to: {path}")
+
+    def copy_jira_comment(self):
+        row = self.report_table.currentRow()
+        if row < 0:
+            # Fallback to last row if none selected
+            row = self.report_table.rowCount() - 1
+            
+        if row < 0:
+            return
+
+        # Get data from table
+        scenario = self.report_table.item(row, 4).text() if self.report_table.item(row, 4) else "N/A"
+        result = self.report_table.item(row, 7).text() if self.report_table.item(row, 7) else "N/A"
+        notes = self.report_table.item(row, 8).text() if self.report_table.item(row, 8) else ""
+        
+        # Format comment
+        comment = f"[{result}] {scenario}"
+        if notes:
+            comment += f" - {notes}"
+            
+        # Copy to clipboard
+        QApplication.clipboard().setText(comment)
+        self.append_log(f"Copied Jira/ADO comment: {comment}")

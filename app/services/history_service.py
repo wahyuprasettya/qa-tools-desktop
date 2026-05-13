@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import json
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
-from app.core import paths
+from app.core.database import DatabaseManager
 
 
 @dataclass(slots=True)
@@ -20,35 +19,18 @@ class ExportRecord:
 
 class HistoryService:
     def __init__(self, path: Path | None = None) -> None:
-        paths.ensure_runtime_dirs()
-        self.path = path or paths.DATA_DIR / "export_history.json"
+        self.db = DatabaseManager()
 
     def list_records(self) -> list[ExportRecord]:
-        if not self.path.exists():
-            return []
-        try:
-            raw_records = json.loads(self.path.read_text(encoding="utf-8"))
-            return [ExportRecord(**record) for record in raw_records]
-        except (OSError, json.JSONDecodeError, TypeError):
-            return []
+        rows = self.db.fetch_all("SELECT filename, path, file_type, rows, columns, created_at FROM export_history ORDER BY id DESC LIMIT 100")
+        return [ExportRecord(**row) for row in rows]
 
     def add_record(self, filename: str, path: Path, file_type: str, rows: int, columns: int) -> None:
-        records = self.list_records()
-        records.insert(
-            0,
-            ExportRecord(
-                filename=filename,
-                path=str(path),
-                file_type=file_type,
-                rows=rows,
-                columns=columns,
-                created_at=datetime.now().isoformat(timespec="seconds"),
-            ),
-        )
-        self.path.write_text(
-            json.dumps([asdict(record) for record in records[:100]], indent=2),
-            encoding="utf-8",
+        created_at = datetime.now().isoformat(timespec="seconds")
+        self.db.execute(
+            "INSERT INTO export_history (filename, path, file_type, rows, columns, created_at) VALUES (?, ?, ?, ?, ?, ?)",
+            (filename, str(path), file_type, rows, columns, created_at)
         )
 
     def clear(self) -> None:
-        self.path.write_text("[]", encoding="utf-8")
+        self.db.execute("DELETE FROM export_history")

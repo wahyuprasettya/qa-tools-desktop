@@ -21,13 +21,15 @@ else:
 EXPORTS_DIR = runtime_root / "exports"
 LOGS_DIR = runtime_root / "logs"
 DATA_DIR = runtime_root / "data"
+PLAYWRIGHT_DIR = runtime_root / "playwright"
+DB_PATH = DATA_DIR / "app_database.db"
 
 
 def ensure_runtime_dirs() -> None:
-    global DATA_DIR, EXPORTS_DIR, LOGS_DIR
+    global DATA_DIR, EXPORTS_DIR, LOGS_DIR, PLAYWRIGHT_DIR
 
     try:
-        for path in (EXPORTS_DIR, LOGS_DIR, DATA_DIR):
+        for path in (EXPORTS_DIR, LOGS_DIR, DATA_DIR, PLAYWRIGHT_DIR):
             path.mkdir(parents=True, exist_ok=True)
     except OSError:
         runtime_root = Path(os.environ.get("TMPDIR", "/tmp")) / "qa-generator"

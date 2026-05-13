@@ -36,7 +36,7 @@ class PlaywrightReportService:
 
         # Headers
         header_font = Font(bold=True, color="FFFFFF")
-        header_fill = PatternFill(start_color="1F4E78", end_color="1F4E78", fill_type="solid")
+        header_fill = PatternFill(start_color="92D050", end_color="92D050", fill_type="solid")
         
         for col, header in enumerate(self.columns, 1):
             cell = ws.cell(row=1, column=col, value=header)

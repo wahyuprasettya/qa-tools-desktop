@@ -219,6 +219,26 @@ class PageSpeedScreen(QWidget):
             
             if file_path.endswith('.xlsx'):
                 df.to_excel(file_path, index=False)
+                
+                # Apply styling
+                from openpyxl import load_workbook
+                from openpyxl.styles import PatternFill, Font, Alignment
+                wb = load_workbook(file_path)
+                ws = wb.active
+                header_fill = PatternFill(start_color="92D050", end_color="92D050", fill_type="solid")
+                header_font = Font(bold=True, color="FFFFFF")
+                
+                for cell in ws[1]:
+                    cell.fill = header_fill
+                    cell.font = header_font
+                    cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+                
+                # Auto-adjust columns
+                from openpyxl.utils import get_column_letter
+                for col in range(1, ws.max_column + 1):
+                    ws.column_dimensions[get_column_letter(col)].width = 25
+                
+                wb.save(file_path)
             else:
                 df.to_csv(file_path, index=False)
                 

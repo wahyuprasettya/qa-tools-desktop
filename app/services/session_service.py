@@ -1,23 +1,19 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
-
-from app.core import paths
+from app.core.database import DatabaseManager
 
 
 class SessionService:
     def __init__(self, path: Path | None = None) -> None:
-        paths.ensure_runtime_dirs()
-        self.path = path or paths.DATA_DIR / "last_session.json"
+        self.db = DatabaseManager()
 
     def save_text(self, text: str) -> None:
-        self.path.write_text(json.dumps({"raw_text": text}), encoding="utf-8")
+        self.db.execute(
+            "INSERT OR REPLACE INTO sessions (key, value) VALUES (?, ?)",
+            ("last_input_text", text)
+        )
 
     def load_text(self) -> str:
-        if not self.path.exists():
-            return ""
-        try:
-            return str(json.loads(self.path.read_text(encoding="utf-8")).get("raw_text", ""))
-        except (OSError, json.JSONDecodeError):
-            return ""
+        row = self.db.fetch_one("SELECT value FROM sessions WHERE key = ?", ("last_input_text",))
+        return row["value"] if row else ""

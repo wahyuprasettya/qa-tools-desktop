@@ -6,3 +6,4 @@ dist/
 build/
 .agents/
 .codex/
+debian_build/

@@ -1,11 +1,9 @@
 from __future__ import annotations
 
-import json
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from datetime import datetime
-from pathlib import Path
 
-from app.core.paths import DATA_DIR
+from app.core.database import DatabaseManager
 
 
 @dataclass
@@ -28,29 +26,17 @@ class LRHistoryRecord:
 
 class LoadRunnerHistoryService:
     def __init__(self) -> None:
-        self.history_file = DATA_DIR / "lr_history.json"
-        self._ensure_file()
-
-    def _ensure_file(self) -> None:
-        if not self.history_file.exists():
-            self.history_file.parent.mkdir(parents=True, exist_ok=True)
-            self.history_file.write_text("[]", encoding="utf-8")
+        self.db = DatabaseManager()
 
     def list_records(self) -> list[LRHistoryRecord]:
-        try:
-            content = self.history_file.read_text(encoding="utf-8")
-            data = json.loads(content)
-            return [LRHistoryRecord(**item) for item in data]
-        except (json.JSONDecodeError, FileNotFoundError):
-            return []
+        rows = self.db.fetch_all("SELECT timestamp, scenario_path, status, duration_sec, total_transactions, passed_transactions, failed_transactions FROM lr_history ORDER BY id DESC LIMIT 100")
+        return [LRHistoryRecord(**row) for row in rows]
 
     def add_record(self, record: LRHistoryRecord) -> None:
-        records = self.list_records()
-        records.insert(0, record)
-        # Keep only the last 100 records
-        records = records[:100]
-        data = [asdict(r) for r in records]
-        self.history_file.write_text(json.dumps(data, indent=2), encoding="utf-8")
+        self.db.execute(
+            "INSERT INTO lr_history (timestamp, scenario_path, status, duration_sec, total_transactions, passed_transactions, failed_transactions) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            (record.timestamp, record.scenario_path, record.status, record.duration_sec, record.total_transactions, record.passed_transactions, record.failed_transactions)
+        )
 
     def clear(self) -> None:
-        self.history_file.write_text("[]", encoding="utf-8")
+        self.db.execute("DELETE FROM lr_history")

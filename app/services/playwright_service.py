@@ -6,6 +6,7 @@ import signal
 from pathlib import Path
 from typing import Optional
 from PySide6.QtCore import QObject, Signal, QProcess
+from app.core.paths import PLAYWRIGHT_DIR
 
 class PlaywrightSignals(QObject):
     log = Signal(str)
@@ -26,19 +27,19 @@ class PlaywrightService(QObject):
         self.playwright_path = path
 
     def check_is_installed(self) -> bool:
-        """Check if node_modules/@playwright/test exists."""
-        return Path("node_modules/@playwright/test").exists()
+        """Check if node_modules/@playwright/test exists in PLAYWRIGHT_DIR."""
+        return (PLAYWRIGHT_DIR / "node_modules" / "@playwright/test").exists()
 
     def install_dependencies(self):
-        """Runs npm init, npm install, and playwright install sequentially using QProcess."""
+        """Runs npm init, npm install, and playwright install sequentially in PLAYWRIGHT_DIR."""
         if self.test_process and self.test_process.state() != QProcess.NotRunning:
             self.signals.install_finished.emit(False, "A process is already running.")
             return
 
         self.signals.install_progress.emit("Initializing Node project (npm init -y)...")
         
-        # We will chain processes. First npm init
         self.test_process = QProcess()
+        self.test_process.setWorkingDirectory(str(PLAYWRIGHT_DIR))
         self.test_process.finished.connect(self._on_npm_init_finished)
         self.test_process.start("npm", ["init", "-y"])
 
@@ -47,8 +48,9 @@ class PlaywrightService(QObject):
             self.signals.install_finished.emit(False, "Failed to initialize Node project.")
             return
         
-        self.signals.install_progress.emit("Installing @playwright/test (this may take a minute)...")
+        self.signals.install_progress.emit("Installing @playwright/test...")
         self.test_process = QProcess()
+        self.test_process.setWorkingDirectory(str(PLAYWRIGHT_DIR))
         self.test_process.finished.connect(self._on_npm_install_finished)
         self.test_process.start("npm", ["install", "-D", "@playwright/test"])
 
@@ -57,8 +59,9 @@ class PlaywrightService(QObject):
             self.signals.install_finished.emit(False, "Failed to install @playwright/test.")
             return
         
-        self.signals.install_progress.emit("Downloading Playwright browsers (this may take several minutes)...")
+        self.signals.install_progress.emit("Downloading Playwright browsers...")
         self.test_process = QProcess()
+        self.test_process.setWorkingDirectory(str(PLAYWRIGHT_DIR))
         self.test_process.finished.connect(self._on_playwright_install_finished)
         
         parts = self.playwright_path.split()
@@ -78,16 +81,16 @@ class PlaywrightService(QObject):
             # We use subprocess.Popen for codegen because it opens its own window
             # and we might want to capture the output when it's closed.
             # Using -o to a temp file to capture the script.
-            temp_script = Path("temp_recording.spec.ts")
+            temp_script = PLAYWRIGHT_DIR / "temp_recording.spec.ts"
             cmd = f"{self.playwright_path} codegen {url} -o {temp_script}"
             
             self.signals.log.emit(f"Starting recorder: {cmd}")
             
-            # Use shell=True for cross-platform npx handling if needed, 
-            # but better to split if possible.
+            # Use shell=True for cross-platform npx handling
             self.recorder_process = subprocess.Popen(
                 cmd, 
                 shell=True, 
+                cwd=str(PLAYWRIGHT_DIR),
                 preexec_fn=os.setsid if os.name != 'nt' else None
             )
             
@@ -107,7 +110,7 @@ class PlaywrightService(QObject):
             self.signals.log.emit("Recording stopped.")
             
             # Read the generated script if it exists
-            temp_script = Path("temp_recording.spec.ts")
+            temp_script = PLAYWRIGHT_DIR / "temp_recording.spec.ts"
             if temp_script.exists():
                 script_content = temp_script.read_text(encoding="utf-8")
                 self.signals.script_generated.emit(script_content)
@@ -122,14 +125,17 @@ class PlaywrightService(QObject):
             return
 
         self.test_process = QProcess()
+        self.test_process.setWorkingDirectory(str(PLAYWRIGHT_DIR))
         self.test_process.readyReadStandardOutput.connect(self._handle_stdout)
         self.test_process.readyReadStandardError.connect(self._handle_stderr)
         self.test_process.finished.connect(self._handle_finished)
 
-        # Split playwright_path into command and initial args
+        # Ensure temp_test.spec.ts is in PLAYWRIGHT_DIR or absolute path is used
+        abs_script_path = str(Path(script_path).resolve())
+        
         parts = self.playwright_path.split()
         cmd = parts[0]
-        args = parts[1:] + ["test", script_path]
+        args = parts[1:] + ["test", abs_script_path]
         
         self.signals.log.emit(f"Running test: {cmd} {' '.join(args)}")
         self.test_process.start(cmd, args)

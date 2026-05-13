@@ -1,6 +1,0 @@
-| Product | Region | Q1 Revenue | Notes |
-|---|---:|---:|---|
-| Atlas CRM | North America | 184000 | Strong renewal motion |
-| Atlas CRM | Europe | 121500 | Partner-led pipeline |
-| Beacon AI | APAC | 99000 | Needs onboarding cleanup |
-
