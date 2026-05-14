@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=QA Generator
-Comment=Generate and export QA tables
-Exec=/usr/bin/qa-generator
-Icon=qa-generator
-Terminal=false
-Categories=Office;Utility;
-StartupNotify=true
